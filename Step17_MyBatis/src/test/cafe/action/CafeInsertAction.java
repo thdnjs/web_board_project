@@ -25,6 +25,7 @@ public class CafeInsertAction extends Action{
 		dto.setWriter(writer);
 		dto.setTitle(title);
 		dto.setContent(content);
+		
 		//Db에 저장
 		boolean isSuccess = CafeDao.getInstance().insert(dto);
 	

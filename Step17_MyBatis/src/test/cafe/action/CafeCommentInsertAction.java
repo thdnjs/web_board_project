@@ -32,6 +32,8 @@ public class CafeCommentInsertAction extends Action{
 		dto.setTarget_id(target_id);
 		dto.setContent(content);
 		dto.setRef_group(ref_group);
+		dto.setIsDelete("0");
+		
 		if(comment_group == null) {
 			dto.setComment_group(seq);
 		}else { //댓글의 댓글인 경우

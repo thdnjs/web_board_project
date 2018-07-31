@@ -108,6 +108,7 @@
 		</table>
 		<div class="content" style = "margin:15px 0">${dto.content }</div>
 		<a href="list.do" id = "list_view">목록 보기</a>
+		
 		<!-- 댓글에 관련된 UI -->
 		<div class="comments" style = "margin:15px 0">
 			<c:forEach var="tmp" items="${CommentList }">
@@ -122,13 +123,23 @@
 					<a href="javascript:" class="reply_link">답글</a> |
 					<a href="javascript:" class="update_link">수정</a> |
 					<a href="">신고</a> | 
-					<a href="javascript:delete()" class="delete_link">삭제</a>
+					<a href="javascript:deleteAction(${tmp.num },${dto.num })" class="delete_link">삭제</a>
+					<a href = "javascript:likeAction()" class="glyphicon glyphicon-thumbs-up" style = "margin:0px 3px"></a>100
+					<a href = "javascript:dislikeAction()" class="glyphicon glyphicon-thumbs-down" style = "margin:0px 3px"></a>1
 					<c:if test="${tmp.num ne tmp.comment_group }">
 						<br />
 						  <i class="muted">To : ${tmp.target_id }</i>
 					</c:if>
 					
-					<pre>${tmp.content }</pre>
+					<c:choose>
+						<c:when test="${tmp.isDelete eq 1 }">
+							<pre>삭제된 댓글</pre>
+						</c:when>
+						<c:otherwise>
+							<pre>${tmp.content }</pre>
+							
+						</c:otherwise>
+					</c:choose>
 					
 					<form action="comment_insert.do" method="post" class="form-inline form_class" id = "comment_comment" style = "margin:10px 0px">
 						<!-- 덧글 작성자 -->
@@ -153,13 +164,12 @@
 						<textarea name="content" class="form-control" cols="50" rows="1" >${tmp.content }</textarea>
 						<button type="submit" class="btn btn-warning">수정등록</button>
 					</form>		
-					
-							
+						
 				</div>
 			</c:forEach>
 			<!-- 원글에 댓글을 작성할수 있는 폼 -->
-			<div class="comment_form">
-				<form action="comment_insert.do" method="post" class="form-inline">
+			<div class="comment_form" >
+				<form action="comment_insert.do" method="post" class="form-inline" id = "first_comment">
 					<input type="hidden" name="writer" 
 						value="${id }" />
 					<input type="hidden" name="ref_group" 
@@ -179,7 +189,7 @@
 	var isLogin=${isLogin};
 	
 	//댓글 전송 이벤트가 일어 났을때 실행할 함수 등록
-	$("#comment_comment, .comment form").submit(function(){
+	$("#comment_comment, .comment form, #first_comment").submit(function(){
 		if(!isLogin){//로그인 하지 않았으면
 			var isGoLogin=confirm("로그인이 필요 합니다.");
 			if(isGoLogin){
@@ -187,7 +197,7 @@
 				location.href="${pageContext.request.contextPath}"+
 					"/users/loginform.do"+
 					"?url=${pageContext.request.contextPath}"+
-					"/cafe/detail.do?num=${dto.num}";
+					"/cafe/detail.do?num=${dto.num}"; 
 			}
 			return false;//폼 전송 막기 
 		}
@@ -211,6 +221,31 @@
 		.find("#comment_update_comment")
 		.slideToggle(200);
 	});
+	
+	function deleteAction(num,num2){
+		var isDelete=confirm("댓글을 삭제하시겠습니까?");
+		if(isDelete){
+			location.href="comment_delete.do?num="+num+"&num2="+num2;
+		}
+		
+	}
+
+	function likeAction(){
+		var reallyLike=confirm("댓글을 좋아요 하시겠습니까?");
+		if(reallyLike){
+			location.href="comment_like.do?num="+num;
+		}
+		
+	}
+	
+	function likeAction(){
+		var reallydisLike=confirm("댓글을 싫어요 하시겠습니까?");
+		if(reallydisLike){
+			location.href="comment_dislike.do?num="+num;
+		}
+		
+	}
+	
 	
 </script>
 

@@ -90,4 +90,23 @@ public class CafeCommentDao {
 		return list;
 	}
 	
+	public boolean delete(int num) {
+		SqlSession session = null;
+		int flag = 0;
+		try {
+			session = factory.openSession(true);
+			flag = session.update("CafeComment.delete", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 }

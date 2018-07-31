@@ -21,5 +21,11 @@ CREATE TABLE board_cafe_comment(
 	target_id VARCHAR2(100), -- 댓글의 대상이 되는 아이디(글 작성자)
 	ref_group NUMBER, --댓글 그룹번호
 	comment_group NUMBER, --원글에 달린 댓글 내에서의 그룹 
-	regdate DATE -- 댓글 등록일 
+	regdate DATE ,-- 댓글 등록일 
+	isDelete VARCHAR2(10) -- 삭제된 댓글인지 여부
 );
+
+DROP table board_cafe_comment;
+
+create TABLE board_cafe_comment_like
+

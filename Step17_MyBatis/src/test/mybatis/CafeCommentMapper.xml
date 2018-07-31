@@ -3,8 +3,8 @@
 <mapper namespace="CafeComment">
 
 <insert id="insert" parameterType="CommentDto">
-		INSERT INTO board_cafe_comment VALUES(#{num}, #{writer},#{content},#{target_id},
-		#{ref_group} ,#{comment_group},SYSDATE)
+		INSERT INTO board_cafe_comment (num,writer,content,target_id,ref_group,comment_group,regdate,isDelete) VALUES(#{num}, #{writer},#{content},#{target_id},
+		#{ref_group} ,#{comment_group},SYSDATE,#{isDelete})
 </insert>
 
 <select id="getSequence" resultType = "int">
@@ -18,6 +18,10 @@
 
 <update id="update" parameterType="CommentDto">
 	UPDATE board_cafe_comment SET content = #{content}, regdate = SYSDATE WHERE num = #{num}
+</update>
+
+<update id="delete" parameterType="int">
+	UPDATE board_cafe_comment SET isDelete = replace(isDelete,'0','1') WHERE num = #{num}
 </update>
 
 
