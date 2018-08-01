@@ -2,7 +2,9 @@ package test.controller;
 
 import test.action.HomeAction;
 import test.cafe.action.CafeCommentDeleteAction;
+import test.cafe.action.CafeCommentDislikeAction;
 import test.cafe.action.CafeCommentInsertAction;
+import test.cafe.action.CafeCommentLikeAction;
 import test.cafe.action.CafeCommentUpdateAction;
 import test.cafe.action.CafeDatailAction;
 import test.cafe.action.CafeDeleteAction;
@@ -16,6 +18,10 @@ import test.file.action.FileDownloadAction;
 import test.file.action.FileListAction;
 import test.file.action.FileUploadAction;
 import test.file.action.FileUploadFormAction;
+import test.gallery.action.GalleryDeleteAction;
+import test.gallery.action.GalleryListAction;
+import test.gallery.action.GalleryUploadAction;
+import test.gallery.action.GalleryUploadFormAction;
 import test.member.action.MemberDeleteAction;
 import test.member.action.MemberInsertAction;
 import test.member.action.MemberInsertformAction;
@@ -120,7 +126,21 @@ public class UserActionFactory {
 			action=new CafeCommentUpdateAction();
 		}else if(command.equals("/cafe/comment_delete")) {
 			action=new CafeCommentDeleteAction();
+		}else if(command.equals("/cafe/comment_like")) {
+			action=new CafeCommentLikeAction();
+		}else if(command.equals("/cafe/comment_dislike")) {
+			action=new CafeCommentDislikeAction();
+		}else if(command.equals("/gallery/list")) {
+			action=new GalleryListAction();
+		}else if(command.equals("/gallery/private/upload")) {
+			action=new GalleryUploadAction();
+		}else if(command.equals("/gallery/private/upload_form")) {
+			action=new GalleryUploadFormAction();
+		}else if(command.equals("/gallery/private/delete")) {
+			action=new GalleryDeleteAction();
 		}
+		
+		
 		
 		return action;
 	}

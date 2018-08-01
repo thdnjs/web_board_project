@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CafeCommentEvaluation">
+
+<insert id="insert" parameterType="CommentEvaluationDto">
+	INSERT INTO board_cafe_comment_evaluation VALUES(#{id}, #{likeCommentNum},#{dislikeCommentNum})
+</insert>
+
+<select id="select" parameterType="int" resultType="int">
+	SELECT COUNT(*) 
+	FROM board_cafe_comment_evaluation 
+	WHERE likeCommentNum = #{num} 
+	<!-- 숫자 반환 -->
+</select>
+	
+</mapper>

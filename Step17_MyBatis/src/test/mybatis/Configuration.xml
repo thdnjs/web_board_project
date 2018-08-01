@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="test.users.dto.UsersDto" alias = "usersDto"/>
 		<typeAlias type="test.cafe.dto.CafeDto" alias="cafeDto"/>
 		<typeAlias type="test.cafe.dto.CafeCommentDto" alias="CommentDto"/>	
+		<typeAlias type="test.gallery.dto.GalleryDto" alias="GalleryDto"/>	
+		<typeAlias type="test.cafe.dto.CafeCommentEvaluationDto" alias="CommentEvaluationDto"/>	
 	</typeAliases>
 	
 	<!-- 환경설정 -->
@@ -34,7 +36,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="test/mybatis/UsersMapper.xml"/>
 		<mapper resource="test/mybatis/FileMapper.xml"/>
 		<mapper resource="test/mybatis/CafeMapper.xml"/>
+		<mapper resource="test/mybatis/GalleryMapper.xml"/>
 		<mapper resource="test/mybatis/CafeCommentMapper.xml"/>
+		<mapper resource="test/mybatis/CafeCommentEvaluationMapper.xml"/>
 	</mappers>	
 </configuration>
 

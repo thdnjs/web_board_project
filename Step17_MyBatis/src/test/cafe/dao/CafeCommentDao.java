@@ -75,6 +75,7 @@ public class CafeCommentDao {
 		
 	} 
 	
+	
 	//댓글 목록을 리턴하는 메소드
 	public List<CafeCommentDto> getList(int ref_group){
 		SqlSession session = null;
@@ -89,6 +90,22 @@ public class CafeCommentDao {
 		}
 		return list;
 	}
+	
+	//댓글 번호와 좋아요 싫어요 번호 가져오기
+	public List<CafeCommentDto> getEvaluationList(int num){
+		SqlSession session = null;
+		List<CafeCommentDto> list = null;
+		try {
+			session = factory.openSession();
+			list = session.selectList("CafeComment.getEvaluationList",num);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return list;
+	}
+	
 	
 	public boolean delete(int num) {
 		SqlSession session = null;
@@ -106,7 +123,6 @@ public class CafeCommentDao {
 		} else {
 			return false;
 		}
-		
 	}
 	
 }

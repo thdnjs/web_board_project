@@ -27,5 +27,44 @@ CREATE TABLE board_cafe_comment(
 
 DROP table board_cafe_comment;
 
-create TABLE board_cafe_comment_like
+create TABLE board_cafe_comment_evaluation(
+	id VARCHAR2(100),--댓글 평가한 사람 아이디
+	likeCommentNum NUMBER DEFAULT 0,--좋아요한 댓글의 번호
+	dislikeCommentNum NUMBER DEFAULT 0 --싫어요한 댓글의 번호
+);
+
+SELECT c.*, l.cnt
+FROM board_cafe_comment c, (SELECT likeCommentNum, count(*) cnt
+FROM board_cafe_comment_evaluation
+GROUP BY likeCommentNum) l
+WHERE c.num = l.likeCommentNum;
+
+SELECT c.*, l.cnt, d.cnt
+FROM board_cafe_comment c, 
+(SELECT likeCommentNum, count(*) cnt
+FROM board_cafe_comment_evaluation
+GROUP BY likeCommentNum) l,
+(SELECT dislikeCommentNum, count(*) cnt
+FROM board_cafe_comment_evaluation) d
+WHERE c.num = l.likeCommentNum;
+
+SELECT c.*, l.cnt, d.cnt
+FROM board_cafe_comment c
+LEFT OUTER JOIN (SELECT likeCommentNum, count(*) cnt
+FROM board_cafe_comment_evaluation
+GROUP BY likeCommentNum) l
+LEFT OUTER JOIN (SELECT dislikeCommentNum, count(*) cnt
+FROM board_cafe_comment_evaluation
+GROUP BY dislikeCommentNum) d;
+
+
+SELECT c.num,NVL(l.cnt,0) likeNum ,NVL(d.cnt,0) dislikeNum
+	FROM board_cafe_comment c
+	LEFT OUTER JOIN (SELECT likeCommentNum, count(*) cnt
+	FROM board_cafe_comment_evaluation
+	GROUP BY likeCommentNum) l ON (c.num = l.likeCommentNum)
+	LEFT OUTER JOIN (SELECT dislikeCommentNum,count(*) cnt 
+	FROM board_cafe_comment_evaluation 
+	GROUP BY dislikeCommentNum) d ON (c.num = d.dislikeCommentNum) WHERE ref_group = 79 ORDER BY comment_group ASC,num ASC
+
 

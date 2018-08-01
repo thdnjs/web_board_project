@@ -9,13 +9,15 @@ public class CafeCommentDto {
 	private int comment_group;
 	private String regdate;
 	private String isDelete;
+	private int likeNum;
+	private int dislikeNum;
 	
 	public CafeCommentDto() {
 		
 	}
 
 	public CafeCommentDto(int num, String writer, String content, String target_id, int ref_group, int comment_group,
-			String regdate, String isDelete) {
+			String regdate, String isDelete, int likeNum, int dislikeNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -25,6 +27,8 @@ public class CafeCommentDto {
 		this.comment_group = comment_group;
 		this.regdate = regdate;
 		this.isDelete = isDelete;
+		this.likeNum = likeNum;
+		this.dislikeNum = dislikeNum;
 	}
 
 	public int getNum() {
@@ -90,6 +94,23 @@ public class CafeCommentDto {
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
 	}
+
+	public int getLikeNum() {
+		return likeNum;
+	}
+
+	public void setLikeNum(int likeNum) {
+		this.likeNum = likeNum;
+	}
+
+	public int getDislikeNum() {
+		return dislikeNum;
+	}
+
+	public void setDislikeNum(int dislikeNum) {
+		this.dislikeNum = dislikeNum;
+	}
+
 	
 	
 }

@@ -13,7 +13,14 @@
 </select>
 
 <select id="getList" parameterType="int" resultType="CommentDto">
-	SELECT * from board_cafe_comment WHERE ref_group = #{num} ORDER BY comment_group ASC,num ASC
+	SELECT c.*,NVL(l.cnt,0) likeNum ,NVL(d.cnt,0) dislikeNum
+	FROM board_cafe_comment c
+	LEFT OUTER JOIN (SELECT likeCommentNum, count(*) cnt
+	FROM board_cafe_comment_evaluation
+	GROUP BY likeCommentNum) l ON (c.num = l.likeCommentNum)
+	LEFT OUTER JOIN (SELECT dislikeCommentNum,count(*) cnt 
+	FROM board_cafe_comment_evaluation 
+	GROUP BY dislikeCommentNum) d ON (c.num = d.dislikeCommentNum) WHERE ref_group = #{num} ORDER BY comment_group ASC,num ASC
 </select>
 
 <update id="update" parameterType="CommentDto">

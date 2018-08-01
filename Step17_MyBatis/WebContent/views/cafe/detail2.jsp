@@ -124,8 +124,8 @@
 					<a href="javascript:" class="update_link">수정</a> |
 					<a href="">신고</a> | 
 					<a href="javascript:deleteAction(${tmp.num },${dto.num })" class="delete_link">삭제</a>
-					<a href = "javascript:likeAction()" class="glyphicon glyphicon-thumbs-up" style = "margin:0px 3px"></a>100
-					<a href = "javascript:dislikeAction()" class="glyphicon glyphicon-thumbs-down" style = "margin:0px 3px"></a>1
+					<a href = "javascript:likeAction(${tmp.num },${dto.num })" class="glyphicon glyphicon-thumbs-up" style = "margin:0px 3px">${tmp.likeNum }</a>
+					<a href = "javascript:dislikeAction(${tmp.num},${dto.num })" class="glyphicon glyphicon-thumbs-down" style = "margin:0px 3px"></a>${tmp.dislikeNum } 
 					<c:if test="${tmp.num ne tmp.comment_group }">
 						<br />
 						  <i class="muted">To : ${tmp.target_id }</i>
@@ -230,18 +230,43 @@
 		
 	}
 
-	function likeAction(){
-		var reallyLike=confirm("댓글을 좋아요 하시겠습니까?");
-		if(reallyLike){
-			location.href="comment_like.do?num="+num;
-		}
+	function likeAction(num,num2){
 		
+		if(!isLogin){//로그인 하지 않았으면
+			var isGoLogin=confirm("로그인이 필요 합니다.");
+			if(isGoLogin){
+				//로그인 페이지로 이동하기
+				location.href="${pageContext.request.contextPath}"+
+					"/users/loginform.do"+
+					"?url=${pageContext.request.contextPath}"+
+					"/cafe/detail.do?num=${dto.num}"; 
+			}
+		}
+		else{
+			var reallyLike=confirm("댓글을 좋아요 하시겠습니까?");
+			if(reallyLike){
+				location.href="comment_like.do?num="+num+"&num2="+num2;
+			}
+		}
 	}
 	
-	function likeAction(){
-		var reallydisLike=confirm("댓글을 싫어요 하시겠습니까?");
-		if(reallydisLike){
-			location.href="comment_dislike.do?num="+num;
+	function dislikeAction(num,num2){
+		
+		if(!isLogin){//로그인 하지 않았으면
+			var isGoLogin=confirm("로그인이 필요 합니다.");
+			if(isGoLogin){
+				//로그인 페이지로 이동하기
+				location.href="${pageContext.request.contextPath}"+
+					"/users/loginform.do"+
+					"?url=${pageContext.request.contextPath}"+
+					"/cafe/detail.do?num=${dto.num}"; 
+			}
+		}
+		else{
+			var reallydisLike=confirm("댓글을 싫어요 하시겠습니까?");
+			if(reallydisLike){
+				location.href="comment_dislike.do?num="+num+"&num2="+num2;
+			}
 		}
 		
 	}

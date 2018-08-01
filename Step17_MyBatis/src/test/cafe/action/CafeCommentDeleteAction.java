@@ -19,7 +19,7 @@ public class CafeCommentDeleteAction extends Action{
 		
 		CafeCommentDao.getInstance().delete(num);
 		
-		// TODO Auto-generated method stub
+		
 		return new ActionForward("/cafe/detail.do?num="+num2,true);
 	}
 

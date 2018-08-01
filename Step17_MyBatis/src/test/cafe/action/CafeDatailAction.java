@@ -20,11 +20,13 @@ public class CafeDatailAction extends Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		//검색과 관련되 파라미터를 읽어와 본다.
 		String keyword = request.getParameter("keyword");
 		String condition = request.getParameter("condition");
+		
 		
 		CafeDto dto = new CafeDto(); //값이 아무것도 안들어가면 null이 들어있다. 넣어준 것만 null이 아님 뀨
 		if(keyword != null) {
@@ -63,11 +65,9 @@ public class CafeDatailAction extends Action{
 		
 		CommentList = CafeCommentDao.getInstance().getList(num);//댓글 정보 받아옴
 		
-	
-		
 		request.setAttribute("CommentList", CommentList);
 		
-	
+		
 		return new ActionForward("/views/cafe/detail2.jsp");
 	}
 
