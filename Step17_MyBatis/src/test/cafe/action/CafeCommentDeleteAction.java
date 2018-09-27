@@ -13,12 +13,10 @@ public class CafeCommentDeleteAction extends Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		int num = Integer.parseInt(request.getParameter("num"));
-		int num2 = Integer.parseInt(request.getParameter("num2"));
-		
+		int num = Integer.parseInt(request.getParameter("num"));//댓글 번호
+		int num2 = Integer.parseInt(request.getParameter("num2"));//글번호 
 		
 		CafeCommentDao.getInstance().delete(num);
-		
 		
 		return new ActionForward("/cafe/detail.do?num="+num2,true);
 	}

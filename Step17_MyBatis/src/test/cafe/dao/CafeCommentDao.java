@@ -14,6 +14,7 @@ public class CafeCommentDao {
 	private CafeCommentDao() {}
 	
 	public static CafeCommentDao getInstance() {
+		
 		if(dao == null) {
 			dao = new CafeCommentDao();
 			factory = SqlMapConfig.getSqlSession();

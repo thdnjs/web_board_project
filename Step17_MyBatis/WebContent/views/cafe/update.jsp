@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title></title>
 </head>
-<body>
+<body> 
 <c:choose>
 	<c:when test="${isSuccess }">
 		<p>글을 수정하였습니다.</p>
